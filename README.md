@@ -1,4 +1,4 @@
-# Building a Symfony Active Directory Authenticator using LDAP
+# Building a Symfony Active Directory authenticator using LDAP
 This is a simple example that authenticates against 
 [ForumSystems](https://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/) public Active 
 Directory service. You can log in using any of the following login / password pairs:
