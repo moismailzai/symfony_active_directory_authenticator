@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <form method="post">
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <h1>Sign in with your Active Directory credentials</h1>
+        <label for="inputUsername">Username</label>
+        <input value="{{ last_username }}" name="username" id="inputUsername" required autofocus>
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" id="inputPassword" required>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('login_form') }}">
+        <div><label><input type="checkbox" name="_remember_me"> Remember me</label></div>
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}

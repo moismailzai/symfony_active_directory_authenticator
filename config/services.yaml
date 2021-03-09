@@ -29,3 +29,21 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    Symfony\Component\Ldap\Ldap:
+        arguments:
+            - '@Symfony\Component\Ldap\Adapter\ExtLdap\Adapter'
+
+    Symfony\Component\Ldap\Adapter\ExtLdap\Adapter:
+        arguments:
+            -   connection_string: "ldap://ldap.forumsys.com:389"
+                # encryption: ssl
+                options:
+                    protocol_version: 3
+                    referrals: false
+                    # x_tls_require_cert: LDAP_OPT_X_TLS_DEMAND
+
+    App\Service\ActiveDirectory:
+        bind:
+            $ldapServiceDn: "%env(LDAP_SERVICE_DN)%"
+            $ldapServiceUser: "%env(LDAP_SERVICE_USER)%"
+            $ldapServicePassword: "%env(LDAP_SERVICE_PASSWORD)%"

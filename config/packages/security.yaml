@@ -1,15 +1,39 @@
 security:
+    enable_authenticator_manager: true # enables the new security system https://symfony.com/doc/current/security/experimental_authenticators.html
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        my_app:
+            entity:
+                class: App\Entity\User
+                property: username
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            custom_authenticators:
+                - App\Security\LdapAuthenticator
             lazy: true
-            provider: users_in_memory
+            logout:
+                path: logout
+            provider: my_app
+            remember_me:
+                lifetime: 604800 # 1 week in seconds
+                path: /
+                samesite: strict
+                secret: '%kernel.secret%'
+                secure: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
