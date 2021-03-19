@@ -4,15 +4,9 @@ security:
         App\Entity\User:
             algorithm: auto
 
-
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         my_app:
-            entity:
-                class: App\Entity\User
-                property: username
-        # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
             entity:
                 class: App\Entity\User
                 property: username

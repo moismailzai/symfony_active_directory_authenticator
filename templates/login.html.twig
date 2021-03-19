@@ -4,7 +4,8 @@
         {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-        <h1>Sign in with your Active Directory credentials</h1>
+        <h1>Sign in with your Active Directory credentials (try <code>einstein / password</code>)</h1>
+        <p>This demo authenticates against the public <a href="https://forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/">ForumSys Online LDAP Test Server</a>. See that page for a list of valid users.</p>
         <label for="inputUsername">Username</label>
         <input value="{{ last_username }}" name="username" id="inputUsername" required autofocus>
         <label for="inputPassword">Password</label>
